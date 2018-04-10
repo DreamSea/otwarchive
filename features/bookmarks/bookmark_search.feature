@@ -8,6 +8,20 @@ Feature: Search Bookmarks
     Given I am on the search bookmarks page
 
   @old-search
+  Scenario: Search bookmarks for any field should not match hidden information
+    #Given there is a work "Now You See Me" in an unrevealed collection "Invisibility"
+    Given I have the hidden collection "Invisibility"
+    And I am logged in as a random user
+    And I post the work "Now You See Me" to the collection "Invisibility"
+    And I bookmark the work "Now You See Me"
+    And I am logged out
+    
+    Given I am on the search bookmarks page
+    When I fill in "Any field" with "Now You See Me"
+      And I press "Search bookmarks"
+    Then I should see "No results found."
+
+  @old-search
   Scenario: Search bookmarks by tag
     Given I have bookmarks to search
     When I fill in "Tag" with "classic"
