@@ -195,6 +195,11 @@ When /^I visit the change username page for (.*)$/ do |login|
   visit change_username_user_path(user)
 end
 
+When(/^I follow the activation link for "([^"]*)"$/) do |login|
+  user = User.find_by(login: login)
+  visit activate_url(id: user.activation_code)
+end
+
 # THEN
 
 Then /^I should get the error message for wrong username or password$/ do

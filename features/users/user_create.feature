@@ -51,3 +51,10 @@ Feature: Sign Up for a new account
     Then I should see "Account Created!"
       And I should get a new user activation email
       And a new user account should exist
+
+  Scenario: The user should be able to activate a new account
+    When I fill in the sign up form with valid data
+      And I fill in "user_login" with "mrparis"
+      And I press "Create Account"
+    When I follow the activation link for "mrparis"
+    Then I should see "Account activation complete! Please log in."
